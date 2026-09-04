@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Sri Chatrapathi Shivaji Ganesh Mandali</title>
+    <meta name="description" content="Donation & expense ledger for Sri Chatrapathi Shivaji Ganesh Mandali">
+    <link rel="manifest" href="data:application/manifest+json,{}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0F0E17;
+            --bg-card: #1A1926;
+            --bg-card-hover: #222136;
+            --bg-elevated: #252438;
+            --accent: #FF6B35;
+            --accent-glow: rgba(255, 107, 53, 0.25);
+            --accent-soft: #FF8C61;
+            --gold: #F5C842;
+            --gold-soft: rgba(245, 200, 66, 0.15);
+            --green: #2DD4A8;
+            --green-soft: rgba(45, 212, 168, 0.12);
+            --red: #FF5C6C;
+            --red-soft: rgba(255, 92, 108, 0.12);
+            --blue: #6C8EFF;
+            --text-primary: #FFFFFE;
+            --text-secondary: #A7A4C2;
+            --text-muted: #6B6889;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-accent: rgba(255, 107, 53, 0.3);
+            --glass: rgba(26, 25, 38, 0.75);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 22px;
+            --radius-xl: 28px;
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.25);
+            --shadow-glow: 0 0 40px var(--accent-glow);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 100px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ===================== HEADER ===================== */
+        header.top {
+            position: relative;
+            padding: 28px 20px 30px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a0e2e 0%, #0F0E17 50%, #1a1020 100%);
+        }
+
+        header.top::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        header.top::after {
+            content: "";
+            position: absolute;
+            bottom: -60px;
+            left: -40px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 200, 66, 0.1) 0%, transparent 70%);
+            animation: pulse-glow 5s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 1; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gold-soft);
+            border: 1px solid rgba(245, 200, 66, 0.2);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        header.top h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            line-height: 1.25;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header.top .sub {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .member-row {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .member-row span {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .member-row select {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-size: 13px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            outline: none;
+        }
+        .member-row select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .member-row button {
+            background: none;
+            border: 1px dashed var(--accent);
+            color: var(--accent-soft);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .member-row button:hover {
+            background: var(--accent-glow);
+            color: var(--accent);
+        }
+
+        /* ===================== STATS ===================== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 14px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stat-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .stat-card.in::before { background: linear-gradient(90deg, var(--green), #4AE3C0); }
+        .stat-card.out::before { background: linear-gradient(90deg, var(--red), #FF8A94); }
+        .stat-card.bal::before { background: linear-gradient(90deg, var(--accent), var(--gold)); }
+
+        .stat-card .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+
+        .stat-card .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .stat-card.in .value { color: var(--green); }
+        .stat-card.out .value { color: var(--red); }
+        .stat-card.bal .value { color: var(--accent); }
+
+        /* ===================== TABS ===================== */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            padding: 8px 16px 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 12px 6px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-secondary);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent), #e05a2b);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 16px var(--accent-glow);
+        }
+
+        .panel {
+            padding: 16px;
+            animation: fadeSlide 0.35s ease;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel.hidden {
+            display: none;
+        }
+
+        /* ===================== CARDS / FORMS ===================== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, var(--accent), var(--gold));
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .field input::placeholder { color: var(--text-muted); }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: var(--transition);
+            gap: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .btn:active { transform: scale(0.97); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #e05a2b 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px var(--accent-glow);
+        }
+        .btn-primary:hover { box-shadow: 0 6px 24px var(--accent-glow); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1.5px solid var(--border);
+        }
+        .btn-outline:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--green) 0%, #20B494 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(45, 212, 168, 0.2);
+        }
+
+        /* ===================== TRANSACTION LIST ===================== */
+        .txn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .txn:hover {
+            border-color: rgba(255,255,255,0.1);
+            background: var(--bg-card-hover);
+        }
+
+        .txn .who {
+            font-weight: 700;
+            font-size: 14.5px;
+            color: var(--text-primary);
+        }
+
+        .txn .meta {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .txn .amt {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .txn.in .amt { color: var(--green); }
+        .txn.out .amt { color: var(--red); }
+
+        .txn-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .txn-actions button {
+            border: none;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 11.5px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .txn-actions button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty .display {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        /* ===================== SEARCH ===================== */
+        .search-bar {
+            padding: 0 0 12px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            font-size: 14px;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            outline: none;
+            transition: var(--transition);
+        }
+        .search-bar input::placeholder { color: var(--text-muted); }
+        .search-bar input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        /* ===================== MODALS ===================== */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: flex-end;
+            z-index: 50;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-bg.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            width: 100%;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            padding: 24px 20px calc(env(safe-area-inset-bottom, 0px) + 24px);
+            max-height: 88vh;
+            overflow-y: auto;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .modal h3 {
+            margin-bottom: 18px;
+            font-size: 20px;
+        }
+
+        .modal-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--text-muted);
+            border-radius: 4px;
+            margin: 0 auto 16px;
+            opacity: 0.4;
+        }
+
+        /* ===================== RECEIPT — PREMIUM TICKET STYLE ===================== */
+        #receiptWrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 10px 0;
+        }
+
+        #receiptCard {
+            width: 330px;
+            background: #FEFCF7;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+        }
+
+        .r-header {
+            background: linear-gradient(135deg, #1B1340 0%, #2D1858 60%, #3B1F6E 100%);
+            color: #fff;
+            padding: 24px 22px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .r-header::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 200, 66, 0.2), transparent);
+        }
+
+        .r-header::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15), transparent);
+        }
+
+        .r-header .emoji {
+            font-size: 32px;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .r-header .org {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+
+        .r-header .tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 4px 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Torn-edge divider between header and body */
+        .r-tear {
+            position: relative;
+            height: 20px;
+            background: #FEFCF7;
+            overflow: hidden;
+        }
+
+        .r-tear::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -5px;
+            right: -5px;
+            height: 20px;
+            background: radial-gradient(circle 10px at 20px 10px, #FEFCF7 98%, transparent) repeat-x;
+            background-size: 20px 20px;
+            z-index: 1;
+        }
+
+        /* Notch circles */
+        .r-notch-left, .r-notch-right {
+            position: absolute;
+            top: -12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            z-index: 5;
+        }
+        .r-notch-left { left: -12px; }
+        .r-notch-right { right: -12px; }
+
+        .r-body {
+            padding: 16px 22px 8px;
+        }
+
+        .r-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #8E7E6A;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #E0D5C4;
+            font-weight: 600;
+        }
+
+        .r-row span {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .r-received {
+            font-size: 11px;
+            color: #A0917D;
+            margin-bottom: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .r-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1B1340;
+            margin-bottom: 16px;
+        }
+
+        .r-amount-box {
+            background: linear-gradient(135deg, #F0F7F4 0%, #E8F5EE 100%);
+            border: 1.5px solid #C8E6D7;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .r-amount-box .lbl {
+            font-size: 10px;
+            color: #6B8E7D;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .r-amount-box .val {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #1A7F5A;
+        }
+
+        .r-amount-box .words {
+            font-size: 11px;
+            color: #6B8E7D;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .r-note {
+            font-size: 12px;
+            color: #5c4632;
+            margin-bottom: 14px;
+            line-height: 1.5;
+            padding: 10px 12px;
+            background: #FFF9F0;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .r-footer {
+            padding: 0 22px 22px;
+            text-align: center;
+        }
+
+        .r-footer .by {
+            font-size: 11px;
+            color: #A0917D;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .r-footer .blessing {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            color: #1B1340;
+            font-weight: 700;
+        }
+
+        .r-strip {
+            height: 6px;
+            background: repeating-linear-gradient(90deg,
+                #1B1340 0 8px,
+                #F5C842 8px 12px,
+                #FF6B35 12px 20px,
+                #F5C842 20px 24px);
+        }
+
+        .receipt-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* ===================== MEMBER SUMMARY ===================== */
+        .member-summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .member-summary-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .member-summary-card h3::before {
+            content: "";
+            width: 4px;
+            height: 18px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, var(--blue), var(--accent));
+        }
+
+        .member-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .member-summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .member-summary-row .name {
+            font-weight: 700;
+            font-size: 13.5px;
+            color: var(--text-primary);
+        }
+
+        .member-summary-row .count {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .member-summary-row .amt {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--green);
+        }
+
+        /* ===================== TOAST ===================== */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            padding: 12px 22px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            max-width: 90vw;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===================== BOTTOM NAV ===================== */
+        nav.bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            display: flex;
+            padding: 6px 4px calc(env(safe-area-inset-bottom, 0px) + 6px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 40;
+        }
+
+        nav.bottom button {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 8px 2px;
+            font-size: 10.5px;
+            color: var(--text-muted);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        nav.bottom button.active {
+            color: var(--accent);
+        }
+
+        nav.bottom button .icon {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (min-width: 600px) {
+            body {
+                max-width: 480px;
+                margin: 0 auto;
+                border-left: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+            }
+            nav.bottom {
+                max-width: 480px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 380px) {
+            header.top h1 { font-size: 20px; }
+            .stat-card .value { font-size: 17px; }
+            .stat-card { padding: 12px 10px; }
+            .stats { gap: 8px; padding: 12px; }
+            .row2 { grid-template-columns: 1fr; }
+            .r-name { font-size: 19px; }
+            .r-amount-box .val { font-size: 24px; }
+            #receiptCard { width: 290px; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top">
+        <div class="header-content">
+            <div class="header-badge">🕉️ Ganesh Utsav 2026</div>
+            <h1>🐘 Sri Chatrapathi Shivaji<br>Ganesh Mandali</h1>
+            <div class="sub">Donation & expense ledger</div>
+            <div class="member-row">
+                <span>Logged in as:</span>
+                <select id="memberSelect"></select>
+                <button onclick="openAddMemberModal()">+ add member</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="stats">
+        <div class="stat-card in">
+            <div class="label">Collected</div>
+            <div class="value" id="statIn">₹0</div>
+        </div>
+        <div class="stat-card out">
+            <div class="label">Spent</div>
+            <div class="value" id="statOut">₹0</div>
+        </div>
+        <div class="stat-card bal">
+            <div class="label">Balance</div>
+            <div class="value" id="statBal">₹0</div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-btn active" data-tab="collect" onclick="switchTab('collect')">📥 Collect</div>
+        <div class="tab-btn" data-tab="expense" onclick="switchTab('expense')">📤 Expense</div>
+        <div class="tab-btn" data-tab="ledger" onclick="switchTab('ledger')">📒 Ledger</div>
+    </div>
+
+    <!-- COLLECT PANEL -->
+    <div class="panel" id="panel-collect">
+        <div class="card">
+            <h3>New donation</h3>
+            <div class="field"><label>Donor name</label><input id="cName" placeholder="e.g. Suresh Patil"></div>
+            <div class="row2">
+                <div class="field"><label>Mobile number</label><input id="cPhone" placeholder="98xxxxxxxx"
+                        inputmode="tel"></div>
+                <div class="field"><label>Amount (₹)</label><input id="cAmount" placeholder="0" inputmode="numeric">
+                </div>
+            </div>
+            <div class="field"><label>Address</label><input id="cNote" placeholder="Flat no. / area, etc."></div>
+            <button class="btn btn-primary" onclick="recordDonation()">✨ Record & generate receipt</button>
+        </div>
+        <div id="recentCollections"></div>
+    </div>
+
+    <!-- EXPENSE PANEL -->
+    <div class="panel hidden" id="panel-expense">
+        <div class="card">
+            <h3>New expense</h3>
+            <div class="row2">
+                <div class="field"><label>Category</label>
+                    <select id="eCategory">
+                        <option>Decoration</option>
+                        <option>Idol (Murti)</option>
+                        <option>Prasad / Catering</option>
+                        <option>Sound &amp; Lighting</option>
+                        <option>Pandal</option>
+                        <option>Immersion (Visarjan)</option>
+                        <option>Priest / Pooja</option>
+                        <option>Permissions</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="field"><label>Amount (₹)</label><input id="eAmount" placeholder="0" inputmode="numeric">
+                </div>
+            </div>
+            <div class="field"><label>Paid to / vendor</label><input id="eVendor" placeholder="Vendor or person name">
+            </div>
+            <div class="field"><label>Note (optional)</label><input id="eNote" placeholder="Details"></div>
+            <button class="btn btn-secondary" onclick="recordExpense()">💸 Record expense</button>
+        </div>
+        <div id="recentExpenses"></div>
+    </div>
+
+    <!-- LEDGER PANEL -->
+    <div class="panel hidden" id="panel-ledger">
+        <div id="memberSummary"></div>
+        <div class="search-bar"><input id="searchBox" placeholder="🔍 Search by name, vendor, phone..."
+                oninput="renderLedger()"></div>
+        <div id="ledgerList"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- Add Member Modal -->
+    <div class="modal-bg hidden" id="addMemberModal">
+        <div class="modal">
+            <div class="modal-handle"></div>
+            <h3>Add committee member</h3>
+            <div class="field"><label>Name</label><input id="newMemberName" placeholder="e.g. Rakesh"
+                    autocomplete="off"></div>
+            <div class="field"><label>4-digit PIN (optional)</label><input id="newMemberPin" type="password"
+                    inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off"></div>
+            <div id="addMemberError" style="color:var(--red); font-size:12.5px; margin-bottom:12px; display:none;">
+            </div>
+            <button class="btn btn-primary" onclick="submitAddMember()" style="margin-bottom:10px;">Add member</button>
+            <button class="btn btn-outline" onclick="cancelAddMember()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- PIN Modal -->
+    <div class="modal-bg hidden" id="pinModal">
+        <div class="modal">
+            <div class="modal-handle"></div>
+            <h3 id="pinModalTitle">Enter PIN</h3>
+            <div class="field"><label>4-digit PIN</label><input id="pinInput" type="password" inputmode="numeric"
+                    maxlength="4" placeholder="••••" autocomplete="off"></div>
+            <div id="pinError" style="color:var(--red); font-size:12.5px; margin-bottom:12px; display:none;">
+                Incorrect PIN — try again.</div>
+            <button class="btn btn-primary" onclick="submitPin()" style="margin-bottom:10px;">🔓 Unlock</button>
+            <button class="btn btn-outline" onclick="cancelPin()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal-bg hidden" id="receiptModal">
+        <div class="modal">
+            <div class="modal-handle"></div>
+            <h3>Receipt ready ✅</h3>
+            <div id="receiptWrap">
+                <div id="receiptCard">
+                    <div class="r-header">
+                        <div class="emoji">🐘</div>
+                        <div class="org">Sri Chatrapathi Shivaji<br>Ganesh Mandali</div>
+                        <div class="tag">Donation Receipt</div>
+                    </div>
+                    <div class="r-tear">
+                        <div class="r-notch-left"></div>
+                        <div class="r-notch-right"></div>
+                    </div>
+                    <div class="r-body">
+                        <div class="r-row"><span id="rReceipt">0001</span><span id="rDate">—</span></div>
+                        <div class="r-received">Received with gratitude from</div>
+                        <div class="r-name" id="rName">Donor Name</div>
+                        <div class="r-amount-box">
+                            <div class="lbl">Amount</div>
+                            <div class="val" id="rAmount">₹0</div>
+                            <div class="words" id="rWords">Zero Rupees Only</div>
+                        </div>
+                        <div class="r-note" id="rNote" style="display:none;"></div>
+                    </div>
+                    <div class="r-footer">
+                        <div class="by" id="rBy">Collected by —</div>
+                        <div class="blessing">Ganpati Bappa Morya! 🙏</div>
+                    </div>
+                    <div class="r-strip"></div>
+                </div>
+            </div>
+            <div class="receipt-hint">1. Download the image to your device.<br>2. Use WhatsApp button to open chat &
+                attach the downloaded image.</div>
+            <button class="btn btn-primary" id="downloadBtn" style="margin-bottom:10px;">⬇️ Download Receipt
+                Image</button>
+            <button class="btn btn-whatsapp" id="waSendBtn" style="margin-bottom:10px;">📱 Share Text on
+                WhatsApp</button>
+            <button class="btn btn-outline" onclick="closeReceipt()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'ganesh_utsav_data_v1';
+
+        // Fallback to localStorage if window.storage is not available (e.g., running in a normal browser)
+        const appStorage = window.storage || {
+            get: async (key) => { const v = localStorage.getItem(key); return v ? { value: v } : null; },
+            set: async (key, val) => { localStorage.setItem(key, val); return true; }
+        };
+
+        let state = { members: ['Manoj', 'Saikrishna', 'Srujan', 'Surya'], pins: { Manoj: '1234', Saikrishna: '1234', Srujan: '1234', Surya: '1234' }, donations: [], expenses: [] };
+        let currentMember = state.members[0];
+        let currentReceiptDonation = null; // Store current donation for modal actions
+
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+
+        async function loadState() {
+            try {
+                const res = await appStorage.get(STORAGE_KEY, true);
+                if (res && res.value) {
+                    const parsed = JSON.parse(res.value);
+                    state = Object.assign({ members: ['Manoj', 'Saikrishna', 'Srujan', 'Surya'], pins: {}, donations: [], expenses: [] }, parsed);
+                }
+            } catch (e) {
+                console.log('No existing data yet, starting fresh.');
+            }
+            // Migrate old default placeholder member to the real committee list
+            if (state.members.length === 1 && state.members[0] === 'Committee Member') {
+                state.members = ['Manoj', 'Saikrishna', 'Srujan', 'Surya'];
+                state.pins = { Manoj: '1234', Saikrishna: '1234', Srujan: '1234', Surya: '1234' };
+                saveState();
+            }
+            // Ensure the 4 committee members always have the standard PIN set
+            if (!state.pins) state.pins = {};
+            ['Manoj', 'Saikrishna', 'Srujan', 'Surya'].forEach(m => {
+                if (state.members.includes(m) && !state.pins[m]) state.pins[m] = '1234';
+            });
+            currentMember = state.members[0] || 'Manoj';
+            renderMemberSelect();
+            renderAll();
+            unlockCollectForm();
+        }
+
+        async function saveState() {
+            try {
+                const result = await appStorage.set(STORAGE_KEY, JSON.stringify(state), true);
+                if (!result) console.error('Save returned no result');
+            } catch (e) {
+                console.error('Storage error', e);
+                toast('⚠️ Could not save — try again');
+            }
+        }
+
+        function renderMemberSelect() {
+            const sel = document.getElementById('memberSelect');
+            sel.innerHTML = state.members.map(m => `<option value="${escapeHtml(m)}" ${m === currentMember ? 'selected' : ''}>${escapeHtml(m)}</option>`).join('');
+            sel.onchange = () => {
+                const chosen = sel.value;
+                if (chosen === currentMember) return;
+                const DEFAULT_PINS = { Manoj: '1234', Saikrishna: '1234', Srujan: '1234', Surya: '1234' };
+                const pin = (state.pins && state.pins[chosen]) || DEFAULT_PINS[chosen] || null;
+                if (pin) {
+                    lockCollectForm();
+                    openPinModal(chosen, pin, sel);
+                } else {
+                    currentMember = chosen;
+                    unlockCollectForm();
+                    toast(`Switched to ${chosen}`);
+                }
+            };
+        }
+
+        let pendingSwitch = null;
+
+        function openPinModal(chosen, correctPin, selEl) {
+            pendingSwitch = { chosen, correctPin, selEl };
+            document.getElementById('pinModalTitle').textContent = `Enter PIN for ${chosen}`;
+            document.getElementById('pinInput').value = '';
+            document.getElementById('pinError').style.display = 'none';
+            document.getElementById('pinModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('pinInput').focus(), 100);
+        }
+
+        function submitPin() {
+            if (!pendingSwitch) return;
+            const entered = document.getElementById('pinInput').value.trim();
+            if (entered === pendingSwitch.correctPin) {
+                currentMember = pendingSwitch.chosen;
+                document.getElementById('pinModal').classList.add('hidden');
+                unlockCollectForm();
+                toast(`Welcome, ${pendingSwitch.chosen} — you can now collect donations`);
+                pendingSwitch = null;
+            } else {
+                document.getElementById('pinError').style.display = 'block';
+                document.getElementById('pinInput').value = '';
+                document.getElementById('pinInput').focus();
+            }
+        }
+
+        function cancelPin() {
+            if (pendingSwitch && pendingSwitch.selEl) {
+                pendingSwitch.selEl.value = currentMember; // revert dropdown
+            }
+            document.getElementById('pinModal').classList.add('hidden');
+            pendingSwitch = null;
+            unlockCollectForm();
+        }
+
+        function lockCollectForm() {
+            ['cName', 'cPhone', 'cAmount', 'cNote'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.disabled = true;
+            });
+            const btn = document.querySelector('#panel-collect .btn-primary');
+            if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
+        }
+
+        function unlockCollectForm() {
+            ['cName', 'cPhone', 'cAmount', 'cNote'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.disabled = false;
+            });
+            const btn = document.querySelector('#panel-collect .btn-primary');
+            if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+        }
+
+        function openAddMemberModal() {
+            document.getElementById('newMemberName').value = '';
+            document.getElementById('newMemberPin').value = '';
+            document.getElementById('addMemberError').style.display = 'none';
+            document.getElementById('addMemberModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('newMemberName').focus(), 100);
+        }
+
+        function cancelAddMember() {
+            document.getElementById('addMemberModal').classList.add('hidden');
+        }
+
+        function submitAddMember() {
+            const name = document.getElementById('newMemberName').value.trim();
+            const pin = document.getElementById('newMemberPin').value.trim();
+            const errEl = document.getElementById('addMemberError');
+
+            if (!name) {
+                errEl.textContent = 'Enter a name.';
+                errEl.style.display = 'block';
+                return;
+            }
+            if (state.members.includes(name)) {
+                errEl.textContent = `${name} is already a member.`;
+                errEl.style.display = 'block';
+                return;
+            }
+            if (pin && !/^\d{4}$/.test(pin)) {
+                errEl.textContent = 'PIN must be exactly 4 digits, or left blank.';
+                errEl.style.display = 'block';
+                return;
+            }
+
+            state.members.push(name);
+            if (!state.pins) state.pins = {};
+            if (pin) state.pins[name] = pin;
+
+            currentMember = name;
+            renderMemberSelect();
+            renderMemberSummary();
+            saveState();
+            document.getElementById('addMemberModal').classList.add('hidden');
+            toast(`${name} added and logged in`);
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+            document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById('panel-' + tab).classList.remove('hidden');
+            if (tab === 'ledger') renderLedger();
+        }
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        function fmtMoney(n) { return '₹' + Number(n || 0).toLocaleString('en-IN'); }
+
+        function numberToWordsIndian(num) {
+            num = Math.floor(Number(num) || 0);
+            if (num === 0) return 'Zero Rupees Only';
+
+            const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten',
+                'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+            const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+            function twoDigits(n) {
+                if (n < 20) return ones[n];
+                return tens[Math.floor(n / 10)] + (n % 10 ? ' ' + ones[n % 10] : '');
+            }
+            function threeDigits(n) {
+                if (n < 100) return twoDigits(n);
+                return ones[Math.floor(n / 100)] + ' Hundred' + (n % 100 ? ' ' + twoDigits(n % 100) : '');
+            }
+
+            const crore = Math.floor(num / 10000000); num %= 10000000;
+            const lakh = Math.floor(num / 100000); num %= 100000;
+            const thousand = Math.floor(num / 1000); num %= 1000;
+            const rest = num;
+
+            let parts = [];
+            if (crore) parts.push(threeDigits(crore) + ' Crore');
+            if (lakh) parts.push(threeDigits(lakh) + ' Lakh');
+            if (thousand) parts.push(threeDigits(thousand) + ' Thousand');
+            if (rest) parts.push(threeDigits(rest));
+
+            return parts.join(' ') + ' Rupees Only';
+        }
+
+        function fmtDate(iso) {
+            const d = new Date(iso);
+            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+        function receiptNo() {
+            return String(state.donations.length + 1).padStart(4, '0');
+        }
+
+        function recordDonation() {
+            const name = document.getElementById('cName').value.trim();
+            const phone = document.getElementById('cPhone').value.trim();
+            const amount = parseFloat(document.getElementById('cAmount').value);
+            const note = document.getElementById('cNote').value.trim();
+
+            if (!name) { toast('Enter donor name'); return; }
+            if (!amount || amount <= 0) { toast('Enter a valid amount'); return; }
+
+            const donation = {
+                id: 'd_' + Date.now(),
+                receiptNo: receiptNo(),
+                name, phone, amount, note,
+                collectedBy: currentMember,
+                date: new Date().toISOString()
+            };
+            state.donations.push(donation);
+            saveState();
+
+            document.getElementById('cName').value = '';
+            document.getElementById('cPhone').value = '';
+            document.getElementById('cAmount').value = '';
+            document.getElementById('cNote').value = '';
+
+            renderAll();
+            openReceipt(donation);
+        }
+
+        function openReceipt(donation) {
+            currentReceiptDonation = donation;
+            document.getElementById('rReceipt').textContent = donation.receiptNo;
+            document.getElementById('rDate').textContent = fmtDate(donation.date);
+            document.getElementById('rName').textContent = donation.name;
+            document.getElementById('rAmount').textContent = fmtMoney(donation.amount);
+            document.getElementById('rWords').textContent = numberToWordsIndian(donation.amount);
+            document.getElementById('rBy').textContent = 'Collected by ' + donation.collectedBy;
+
+            const noteEl = document.getElementById('rNote');
+            if (donation.note) { noteEl.textContent = 'Address: ' + donation.note; noteEl.style.display = 'block'; }
+            else { noteEl.style.display = 'none'; }
+
+            // Bind buttons
+            document.getElementById('downloadBtn').onclick = () => downloadReceiptImage(donation);
+            document.getElementById('waSendBtn').onclick = () => shareReceiptWhatsApp(donation);
+
+            document.getElementById('receiptModal').classList.remove('hidden');
+        }
+
+        // Dedicated function to reliably save image to local folder
+        function downloadReceiptImage(donation) {
+            const target = document.getElementById('receiptCard');
+            toast('Generating receipt image...');
+
+            html2canvas(target, {
+                scale: 3,
+                backgroundColor: '#FEFCF7',
+                useCORS: true
+            }).then(canvas => {
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        toast('Failed to generate image');
+                        return;
+                    }
+
+                    // Create a reliable download link
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.download = `Receipt_${donation.receiptNo}.png`;
+                    link.href = url;
+
+                    // Append to body (required for Firefox/some mobile browsers to trigger download)
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Clean up memory
+                    URL.revokeObjectURL(url);
+                    toast('✅ Receipt saved to your Downloads folder!');
+                }, 'image/png');
+            }).catch(err => {
+                console.error(err);
+                toast('Error generating receipt');
+            });
+        }
+
+        // Dedicated function to open WhatsApp with pre-filled text
+        function shareReceiptWhatsApp(donation) {
+            const msg = [
+                `🐘 *Ganpati Bappa Morya!* 🙏`,
+                ``,
+                `Thank you, *${donation.name}*, for your generous contribution to *Sri Chatrapathi Shivaji Ganesh Mandali*.`,
+                ``,
+                `🧾 Receipt No: *${donation.receiptNo}*`,
+                `💰 Amount: *${fmtMoney(donation.amount)}*`,
+                `📅 Date: *${fmtDate(donation.date)}*`,
+                ``,
+                `Please find your donation receipt attached. (Downloaded to your device)`
+            ].join('\n');
+
+            const phoneDigits = (donation.phone || '').replace(/\D/g, '');
+            const waNumber = phoneDigits ? (phoneDigits.length === 10 ? '91' + phoneDigits : phoneDigits) : '';
+            const waUrl = waNumber
+                ? `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`
+                : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
+            window.open(waUrl, '_blank');
+        }
+
+        function closeReceipt() {
+            document.getElementById('receiptModal').classList.add('hidden');
+            currentReceiptDonation = null;
+        }
+
+        function recordExpense() {
+            const category = document.getElementById('eCategory').value;
+            const amount = parseFloat(document.getElementById('eAmount').value);
+            const vendor = document.getElementById('eVendor').value.trim();
+            const note = document.getElementById('eNote').value.trim();
+
+            if (!amount || amount <= 0) { toast('Enter a valid amount'); return; }
+
+            state.expenses.push({
+                id: 'e_' + Date.now(),
+                category, amount, vendor, note,
+                paidBy: currentMember,
+                date: new Date().toISOString()
+            });
+            saveState();
+
+            document.getElementById('eAmount').value = '';
+            document.getElementById('eVendor').value = '';
+            document.getElementById('eNote').value = '';
+
+            renderAll();
+            toast('Expense recorded');
+        }
+
+        function deleteDonation(id) {
+            if (!confirm('Delete this donation record?')) return;
+            state.donations = state.donations.filter(d => d.id !== id);
+            saveState(); renderAll();
+        }
+        function deleteExpense(id) {
+            if (!confirm('Delete this expense record?')) return;
+            state.expenses = state.expenses.filter(e => e.id !== id);
+            saveState(); renderAll();
+        }
+
+        function renderStats() {
+            const totalIn = state.donations.reduce((s, d) => s + Number(d.amount || 0), 0);
+            const totalOut = state.expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
+            document.getElementById('statIn').textContent = fmtMoney(totalIn);
+            document.getElementById('statOut').textContent = fmtMoney(totalOut);
+            document.getElementById('statBal').textContent = fmtMoney(totalIn - totalOut);
+        }
+
+        function renderRecentCollections() {
+            const el = document.getElementById('recentCollections');
+            const items = [...state.donations].reverse().slice(0, 8);
+            if (items.length === 0) { el.innerHTML = `<div class="empty"><div class="display">No donations yet</div>Record the first one above.</div>`; return; }
+            el.innerHTML = items.map(d => `
+    <div class="txn in">
+      <div>
+        <div class="who">${escapeHtml(d.name)}</div>
+        <div class="meta">${d.receiptNo} · ${fmtDate(d.date)} · by ${escapeHtml(d.collectedBy)}</div>
+        <div class="txn-actions">
+          <button onclick='openReceipt(${JSON.stringify(d).replace(/'/g, "&#39;")})'>Resend receipt</button>
+          <button onclick="deleteDonation('${d.id}')">Delete</button>
+        </div>
+      </div>
+      <div class="amt">+${fmtMoney(d.amount)}</div>
+    </div>
+  `).join('');
+        }
+
+        function renderRecentExpenses() {
+            const el = document.getElementById('recentExpenses');
+            const items = [...state.expenses].reverse().slice(0, 8);
+            if (items.length === 0) { el.innerHTML = `<div class="empty"><div class="display">No expenses yet</div>Log spending as it happens.</div>`; return; }
+            el.innerHTML = items.map(e => `
+    <div class="txn out">
+      <div>
+        <div class="who">${escapeHtml(e.category)}${e.vendor ? ' — ' + escapeHtml(e.vendor) : ''}</div>
+        <div class="meta">${fmtDate(e.date)} · by ${escapeHtml(e.paidBy)}</div>
+        <div class="txn-actions"><button onclick="deleteExpense('${e.id}')">Delete</button></div>
+      </div>
+      <div class="amt">-${fmtMoney(e.amount)}</div>
+    </div>
+  `).join('');
+        }
+
+        function renderMemberSummary() {
+            const el = document.getElementById('memberSummary');
+            if (!el) return;
+            const byMember = {};
+            state.members.forEach(m => byMember[m] = { count: 0, total: 0 });
+            state.donations.forEach(d => {
+                if (!byMember[d.collectedBy]) byMember[d.collectedBy] = { count: 0, total: 0 };
+                byMember[d.collectedBy].count += 1;
+                byMember[d.collectedBy].total += Number(d.amount || 0);
+            });
+
+            const rows = Object.entries(byMember).map(([name, s]) => `
+    <div class="member-summary-row">
+      <div>
+        <div class="name">${escapeHtml(name)}</div>
+        <div class="count">${s.count} donation${s.count === 1 ? '' : 's'}</div>
+      </div>
+      <div class="amt">${fmtMoney(s.total)}</div>
+    </div>
+  `).join('');
+
+            el.innerHTML = `<div class="member-summary-card"><h3>Collected by member</h3>${rows}</div>`;
+        }
+
+        function renderLedger() {
+            const el = document.getElementById('ledgerList');
+            const q = (document.getElementById('searchBox').value || '').toLowerCase();
+            let all = [
+                ...state.donations.map(d => ({ ...d, type: 'in', label: d.name, meta: `${d.receiptNo} · ${fmtDate(d.date)}` })),
+                ...state.expenses.map(e => ({ ...e, type: 'out', label: (e.category + (e.vendor ? ' — ' + e.vendor : '')), meta: fmtDate(e.date) }))
+            ].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (q) {
+                all = all.filter(x =>
+                    (x.label || '').toLowerCase().includes(q) ||
+                    (x.phone || '').toLowerCase().includes(q) ||
+                    (x.note || '').toLowerCase().includes(q)
+                );
+            }
+
+            if (all.length === 0) { el.innerHTML = `<div class="empty"><div class="display">Nothing here</div>Try a different search.</div>`; return; }
+
+            el.innerHTML = all.map(x => `
+    <div class="txn ${x.type}">
+      <div>
+        <div class="who">${escapeHtml(x.label)}</div>
+        <div class="meta">${x.meta} · ${x.type === 'in' ? 'by ' + escapeHtml(x.collectedBy) : 'by ' + escapeHtml(x.paidBy)}</div>
+      </div>
+      <div class="amt">${x.type === 'in' ? '+' : '-'}${fmtMoney(x.amount)}</div>
+    </div>
+  `).join('');
+        }
+
+        function renderAll() {
+            renderStats();
+            renderRecentCollections();
+            renderRecentExpenses();
+            renderMemberSummary();
+            if (!document.getElementById('panel-ledger').classList.contains('hidden')) renderLedger();
+        }
+
+        document.getElementById('pinInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') submitPin();
+        });
+        document.getElementById('newMemberPin').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') submitAddMember();
+        });
+
+        loadState();
+    </script>
+</body>
+
+</html>
